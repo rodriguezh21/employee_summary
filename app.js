@@ -7,10 +7,8 @@ const Manager = require("./lib/Manager")
 
 async function userInput(){
    
-     
     let teamHTML = "";
 
-    
     await inquirer.prompt([ 
      {
         type: "input",
@@ -32,8 +30,8 @@ async function userInput(){
         message: `what the employee's title?`,
         name: "title",
         choices: ["Engineer", "Intern", "Manager"]
-            }
-        ])
+    }
+    ])
         .then((data) => {
 
             name = data.name;
@@ -49,16 +47,18 @@ async function userInput(){
                     {
                         type: "input",
                         message: "What is your Manager's Office Number?",
-                        name: "officeNo"
+                        name: "officeNumber"
                     }
                 ])
                 .then((data) => {
 
-                    const manager = new Manager(name, id, email, data.officeNo);
+                    const manager = new Manager(name, id, email, data.officeNumber);
 
                     teamMember = fs.readFileSync("templates/manager.html");
 
                     teamHTML = teamHTML + "\n" + eval('`'+ teamMember +'`');
+
+                    manager;
                 });
                 break;
 
@@ -75,6 +75,8 @@ async function userInput(){
                     const intern = new Intern(name, id, email, data.school);
                     teamMember = fs.readFileSync("templates/intern.html");
                     teamHTML = teamHTML + "\n" + eval('`'+ teamMember +'`');
+
+                    intern;
                 });
                 break;
 
@@ -91,6 +93,8 @@ async function userInput(){
                     const engineer = new Engineer(name, id, email, data.github);
                     teamMember = fs.readFileSync("templates/engineer.html");
                     teamHTML = teamHTML + "\n" + eval('`'+ teamMember +'`');
+
+                    engineer;
                 });
                 break;
 
