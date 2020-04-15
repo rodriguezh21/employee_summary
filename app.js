@@ -1,36 +1,117 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
 
-const Employee = require("./lib/Employee")
 const Engineer = require("./lib/Engineer")
 const Intern = require("./lib/Intern")
 const Manager = require("./lib/Manager")
 
-function userInput() {
-    return inquirer.prompt([
-        {
-            type: "input",
-            message: "What is your name?",
-            name: "name"
-        },
-        {
-            type: "input",
-            message: "What is your Email address?",
-            name: "email"
-        },
-        {
-            type: "input",
-            message: "What is your role?",
-            name: "role",
-            choices: ['Manager', 'Engineer', 'Intern']
-        },
-        {
-            type: "input",
-            message: "Enter your github username:",
-            name: "github"
-        }
-    ])  
+async function userInput(){
+   
+     
+    let teamHTML = "";
+
     
+    await inquirer.prompt([ 
+     {
+        type: "input",
+        message: `What is employee's name?`,
+        name: "name"
+    },
+    {
+        type: "input",
+        message: `What is the employee's id?`,
+        name: "id"
+    },
+    {
+        type: "input",
+        message: `What is the employee's Email?`,
+        name: "email"
+    },
+    {
+        type: "list",
+        message: `what the employee's title?`,
+        name: "title",
+        choices: ["Engineer", "Intern", "Manager"]
+            }
+        ])
+        .then((data) => {
+
+            name = data.name;
+            id = data.id;
+            title = data.title;
+            email = data.email;
+        });
+
+        switch (title){
+            case "Manager":
+
+                await inquirer.prompt([
+                    {
+                        type: "input",
+                        message: "What is your Manager's Office Number?",
+                        name: "officeNo"
+                    }
+                ])
+                .then((data) => {
+
+                    const manager = new Manager(name, id, email, data.officeNo);
+
+                    teamMember = fs.readFileSync("templates/manager.html");
+
+                    teamHTML = teamHTML + "\n" + eval('`'+ teamMember +'`');
+                });
+                break;
+
+           
+            case "Intern":
+                await inquirer.prompt([
+                    {
+                        type: "input",
+                        message: "What school is your Intern attending?",
+                        name: "school"
+                    }
+                ])
+                .then((data) => {
+                    const intern = new Intern(name, id, email, data.school);
+                    teamMember = fs.readFileSync("templates/intern.html");
+                    teamHTML = teamHTML + "\n" + eval('`'+ teamMember +'`');
+                });
+                break;
+
+            
+            case "Engineer":
+                await inquirer.prompt([
+                    {
+                        type: "input",
+                        message: "What is your Engineer's GitHub?",
+                        name: "github"
+                    }
+                ])
+                .then((data) => {
+                    const engineer = new Engineer(name, id, email, data.github);
+                    teamMember = fs.readFileSync("templates/engineer.html");
+                    teamHTML = teamHTML + "\n" + eval('`'+ teamMember +'`');
+                });
+                break;
+
+        } 
+
+   
+
+    const mainHTML = fs.readFileSync("templates/main.html");
+    
+    teamHTML = eval('`'+ mainHTML +'`');
+
+    fs.writeFile("output/team.html", teamHTML, function(err) {
+
+        if (err) {
+          return console.log(err);
+        }
+      
+        console.log("Success!");
+      
+      });
+
 }
 
 userInput();
