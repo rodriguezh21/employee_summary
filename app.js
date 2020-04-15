@@ -29,6 +29,8 @@ function userInput() {
             message: "Enter your github username:",
             name: "github"
         }
-    ])
+    ])  
     
 }
+
+userInput();
