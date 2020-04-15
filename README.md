@@ -18,7 +18,7 @@ The goal is to creat a software engineering team generator command line applicat
 
 - Follow the prompts until you see a log that says "Success!".
 
-- Then, team.html in the output folder.
+- Then, open team.html in the output folder.
 
 "Success!" You have created an employee management site.
 
