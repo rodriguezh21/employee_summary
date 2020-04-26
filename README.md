@@ -22,6 +22,8 @@ The goal is to creat a software engineering team generator command line applicat
 
 "Success!" You have created an employee management site.
 
+<a href="https://imgflip.com/gif/3y8k20"><img src="https://i.imgflip.com/3y8k20.gif"></a>
+
 ***
 
 # Technologies Used
