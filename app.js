@@ -1,6 +1,8 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
 
+// imports libraries
+
 const Engineer = require("./lib/Engineer")
 const Intern = require("./lib/Intern")
 const Manager = require("./lib/Manager")
@@ -8,6 +10,8 @@ const Manager = require("./lib/Manager")
 async function userInput(){
    
     let teamHTML = "";
+
+    // prompts user for employee information
 
     await inquirer.prompt([ 
      {
@@ -40,67 +44,63 @@ async function userInput(){
             email = data.email;
         });
 
+        // prompts depending on title selection
         switch (title){
             case "Manager":
 
-                await inquirer.prompt([
-                    {
-                        type: "input",
-                        message: "What is your Manager's Office Number?",
-                        name: "officeNumber"
-                    }
-                ])
-                .then((data) => {
+            await inquirer.prompt([
+            {
+                type: "input",
+                message: "What is your Manager's Office Number?",
+                name: "officeNumber"
+            }
+            ]).then((data) => {
 
-                    const manager = new Manager(name, id, email, data.officeNumber);
+                const manager = new Manager(name, id, email, data.officeNumber);
+                teamMember = fs.readFileSync("templates/manager.html");
+                teamHTML = teamHTML + "\n" + eval('`'+ teamMember +'`');
 
-                    teamMember = fs.readFileSync("templates/manager.html");
-
-                    teamHTML = teamHTML + "\n" + eval('`'+ teamMember +'`');
-
-                    manager;
+                manager;
                 });
-                break;
+            break;
 
            
             case "Intern":
-                await inquirer.prompt([
-                    {
-                        type: "input",
-                        message: "What school is your Intern attending?",
-                        name: "school"
-                    }
-                ])
-                .then((data) => {
-                    const intern = new Intern(name, id, email, data.school);
-                    teamMember = fs.readFileSync("templates/intern.html");
-                    teamHTML = teamHTML + "\n" + eval('`'+ teamMember +'`');
+            await inquirer.prompt([
+            {
+                type: "input",
+                message: "What school is your Intern attending?",
+                name: "school"
+            }
+            ]).then((data) => {
+                const intern = new Intern(name, id, email, data.school);
+                teamMember = fs.readFileSync("templates/intern.html");
+                teamHTML = teamHTML + "\n" + eval('`'+ teamMember +'`');
 
-                    intern;
+                intern;
                 });
-                break;
+            break;
 
             
             case "Engineer":
-                await inquirer.prompt([
-                    {
-                        type: "input",
-                        message: "What is your Engineer's GitHub?",
-                        name: "github"
-                    }
-                ])
-                .then((data) => {
-                    const engineer = new Engineer(name, id, email, data.github);
-                    teamMember = fs.readFileSync("templates/engineer.html");
-                    teamHTML = teamHTML + "\n" + eval('`'+ teamMember +'`');
+            await inquirer.prompt([
+            {
+                type: "input",
+                message: "What is your Engineer's GitHub?",
+                name: "github"
+            }
+            ]).then((data) => {
+                const engineer = new Engineer(name, id, email, data.github);
+                teamMember = fs.readFileSync("templates/engineer.html");
+                teamHTML = teamHTML + "\n" + eval('`'+ teamMember +'`');
 
-                    engineer;
+                engineer;
                 });
                 break;
 
         } 
 
-   
+//    reads main.html and writes into team.html
 
     const mainHTML = fs.readFileSync("templates/main.html");
     
