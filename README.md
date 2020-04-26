@@ -1,6 +1,6 @@
 # Employee Summary
 
-## Homework #8
+## Homework #10
 
 ### As a manager
 I want to generate a webpage that displays my team's basic info
@@ -31,3 +31,10 @@ The goal is to creat a software engineering team generator command line applicat
  <img alt="Jest Module" src="https://cdn.auth0.com/blog/testing-react-with-jest/logo.png" width="28" height="30"> Jest https://jestjs.io/en/
  
  <img alt="Inquirer Module" src="https://raw.githubusercontent.com/SBoudrias/Inquirer.js/master/assets/inquirer_readme.svg?sanitize=true" width="28" height="30"> Inquirer https://www.npmjs.com/package/inquirer
+ 
+ ***
+ 
+ # Collaborators
+ 
+ ### Mansi Patel | Senior Tutor
+ 
